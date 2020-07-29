@@ -7,4 +7,6 @@ module emailClient {
 	
 	opens com.saniya;
 	opens com.saniya.view;
+	opens com.saniya.controller;
+	//opens com.saniya.model;
 }
