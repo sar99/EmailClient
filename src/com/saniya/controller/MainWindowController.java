@@ -26,6 +26,13 @@ public class MainWindowController extends BaseController {
 		// TODO Auto-generated constructor stub
 	}
 
+    
+    @FXML
+    void AddAcountAction(ActionEvent event) {
+    	
+    	viewFactory.showLoginWindow();
+    } 
+    
     @FXML
     void optionsAction(ActionEvent event) {
     	viewFactory.showOptionsWindow();

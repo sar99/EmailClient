@@ -1,6 +1,7 @@
 package com.saniya.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.saniya.EmailManager;
 import com.saniya.controller.BaseController;
@@ -15,10 +16,12 @@ import javafx.stage.Stage;
 
 public class ViewFactory {
 	private EmailManager emailManager;
+	private ArrayList<Stage> activeStages;
 
 	public ViewFactory(EmailManager emailManager) {
 		super();
 		this.emailManager = emailManager;
+		activeStages = new ArrayList<Stage>();
 	}
 	
 	
@@ -72,6 +75,7 @@ public class ViewFactory {
 		
 		stage.setScene(scene);
 		stage.show();
+		activeStages.add(stage);
 	}
 	
 	
@@ -79,6 +83,7 @@ public class ViewFactory {
 	public void closeStage(Stage stageToClose)
 	{
 		stageToClose.close();
+		activeStages.remove(stageToClose);
 	}
 	
 	
@@ -105,6 +110,19 @@ public class ViewFactory {
 	public void showOptionsWindow() {
 		BaseController controller = new OptionsWindowController(emailManager, this, "OptionsWindow.fxml");
 		initializer(controller);
+	}
+	
+	
+	public void updateStyles() {
+		for(Stage stage : activeStages)
+		{
+			Scene scene = stage.getScene();
+			scene.getStylesheets().clear();
+			scene.getStylesheets().add(getClass().getResource(ColorTheme.getCssPath(colorTheme)).toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(FontSize.getCssPath(fontSize)).toExternalForm());
+
+		}
+		
 	}
 	
 
